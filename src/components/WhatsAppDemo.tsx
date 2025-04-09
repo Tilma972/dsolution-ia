@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Maximize, X, Zap, Hammer, Utensils, Lightbulb, Scissors, Home, Dumbbell } from 'lucide-react'; // Added icons
+import { Maximize, X, Zap } from 'lucide-react'; // Removed unused icons: Hammer, Utensils, Lightbulb, Scissors, Home, Dumbbell
 
 interface WhatsAppDemoProps {
   title: string;
@@ -30,7 +30,7 @@ const WhatsAppDemo: React.FC<WhatsAppDemoProps> = ({
   return (
     <div className="bg-card-bg p-6 rounded-lg shadow-lg border border-primary/20 transition duration-300 hover:shadow-xl flex flex-col h-full">
       <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
-      {painPoint && <p className="text-sm text-secondary mb-3 italic">"{painPoint}"</p>}
+      {painPoint && <p className="text-sm text-secondary mb-3 italic">&quot;{painPoint}&quot;</p>}
 
       {/* Conteneur de démo avec style WhatsApp */}
       <div

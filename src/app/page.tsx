@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MessageSquare, Clock, Users, CheckCircle, Check, Hammer, Utensils, Lightbulb, Scissors, Home as HomeIcon, Dumbbell, Car } from 'lucide-react'; // Renamed Home icon
+import { MessageSquare, Clock, Users, CheckCircle, Check, Hammer, Utensils, Lightbulb, Scissors, Car } from 'lucide-react'; // Renamed Home icon, removed HomeIcon, Dumbbell
 import WhatsAppDemo from '@/components/WhatsAppDemo'; // Import the new component
 import PricingOption from '@/components/PricingOption';
 import TestimonialCard from '@/components/TestimonialCard';
@@ -72,7 +72,7 @@ export default function Home() {
                 <MessageSquare size={48} />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-white">Automatisation via WhatsApp</h3>
-              <p className="text-subtle-text">Gérez tout depuis l'application que vous utilisez déjà.</p>
+              <p className="text-subtle-text">Gérez tout depuis l&apos;application que vous utilisez déjà.</p>
             </div>
 
             {/* Carte 2: Gain de Temps Garanti */}
@@ -89,8 +89,8 @@ export default function Home() {
               <div className="mb-4 text-primary flex justify-center">
                 <Users size={48} />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Plus de Clients, Moins d'Effort</h3>
-              <p className="text-subtle-text">Ne manquez plus d'opportunités grâce à des réponses rapides et un suivi simplifié.</p>
+              <h3 className="text-xl font-semibold mb-2 text-white">Plus de Clients, Moins d&apos;Effort</h3>
+              <p className="text-subtle-text">Ne manquez plus d&apos;opportunités grâce à des réponses rapides et un suivi simplifié.</p>
             </div>
 
             {/* Carte 4: Simplicité Avant Tout */}
@@ -128,7 +128,7 @@ export default function Home() {
                 Ce que vous <span className="text-primary">gagnez concrètement</span>
               </h2>
               <p className="text-subtle-text text-lg mb-8">
-                Des résultats mesurables et immédiats pour votre activité. Notre solution d'automatisation WhatsApp transforme votre façon de travailler et d'interagir avec vos clients.
+                Des résultats mesurables et immédiats pour votre activité. Notre solution d&apos;automatisation WhatsApp transforme votre façon de travailler et d&apos;interagir avec vos clients.
               </p>
             </div>
           </div>
@@ -278,7 +278,7 @@ export default function Home() {
           
           <p className="text-subtle-text text-center max-w-3xl mx-auto mb-16">
             Choisissez le plan adapté à vos ambitions ou contactez-nous pour une solution entièrement personnalisée. 
-            Nos tarifs incluent l'accès à la plateforme WhatsApp Business officielle et un volume de conversations.
+            Nos tarifs incluent l&apos;accès à la plateforme WhatsApp Business officielle et un volume de conversations.
           </p>
           
           {/* Grille des options de prix */}
@@ -573,7 +573,7 @@ export default function Home() {
                   
                   {/* Intégration systèmes */}
                   <tr className="border-b border-gray-700/50 hover:bg-dark-bg/50">
-                    <td className="py-3 px-4 text-subtle-text">Intégration avec d'autres systèmes</td>
+                    <td className="py-3 px-4 text-subtle-text">Intégration avec d&apos;autres systèmes</td>
                     <td className="py-3 px-4 text-center text-white">
                       <svg className="w-5 h-5 mx-auto text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -652,13 +652,13 @@ export default function Home() {
             {/* Badge Offre de Lancement */}
             <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-4 mb-6 max-w-2xl mx-auto">
               <p className="text-center text-white font-semibold">
-                <span className="text-secondary">Offre de Lancement :</span> Tarifs garantis jusqu'au 30 juin 2025 !
+                <span className="text-secondary">Offre de Lancement :</span> Tarifs garantis jusqu&apos;au 30 juin 2025 !
               </p>
             </div>
             
             {/* Note sur les conversations */}
             <div className="text-subtle-text text-center text-sm max-w-2xl mx-auto">
-              <p>*Une 'conversation' (incluse dans Essentiel/Pro) correspond à une session d'échange de 24h initiée par le client ou l'entreprise via WhatsApp.</p>
+              <p>*Une &apos;conversation&apos; (incluse dans Essentiel/Pro) correspond à une session d&apos;échange de 24h initiée par le client ou l&apos;entreprise via WhatsApp.</p>
             </div>
           </div>
         </div>
@@ -676,7 +676,7 @@ export default function Home() {
             <TestimonialCard 
               imageSrc="/images/client-paul.jpg"
               altText="Photo de Paul M., Maçon"
-              quote="Incroyable, j’économise facile 2h par jour sur les devis et la paperasse. L'IA répond direct aux clients, c'est bluffant."
+              quote="Incroyable, j'économise facile 2h par jour sur les devis et la paperasse. L'IA répond direct aux clients, c'est bluffant."
               name="Paul M."
               title="Maçon"
             />
@@ -716,20 +716,20 @@ export default function Home() {
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Pour vous garantir une solution fiable, performante et conforme aux règles de WhatsApp, nous utilisons la <strong>plateforme officielle WhatsApp Business API</strong>. Ne vous inquiétez pas, notre offre inclut un <strong>accompagnement pas à pas</strong> pour la configuration initiale de ce compte (vérification Facebook Business Manager, choix du numéro, etc.). C'est inclus dans les frais de setup.</p>
+                <p>Pour vous garantir une solution fiable, performante et conforme aux règles de WhatsApp, nous utilisons la <strong>plateforme officielle WhatsApp Business API</strong>. Ne vous inquiétez pas, notre offre inclut un <strong>accompagnement pas à pas</strong> pour la configuration initiale de ce compte (vérification Facebook Business Manager, choix du numéro, etc.). C&apos;est inclus dans les frais de setup.</p>
               </div>
             </details>
 
             {/* Item FAQ 2 */}
             <details className="border-b border-gray-700 pb-4 group">
               <summary className="font-semibold text-lg text-primary cursor-pointer list-none flex justify-between items-center">
-                Les tarifs mensuels incluent-ils les frais d'envoi des messages WhatsApp ?
+                Les tarifs mensuels incluent-ils les frais d&apos;envoi des messages WhatsApp ?
                 <span className="text-primary transform transition-transform duration-300 group-open:rotate-45">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Oui, pour vous offrir une meilleure visibilité sur vos coûts, nos plans <strong>incluent un volume généreux de conversations</strong> chaque mois (500 pour l'Essentiel, 1200 pour le Pro). Une conversation est une session d'échange de 24h avec un client via l'API. Si vous dépassez ce volume, un tarif transparent de 0.06€ par conversation supplémentaire s'applique. La grande majorité de nos clients restent dans les volumes inclus.</p>
+                <p>Oui, pour vous offrir une meilleure visibilité sur vos coûts, nos plans <strong>incluent un volume généreux de conversations</strong> chaque mois (500 pour l&apos;Essentiel, 1200 pour le Pro). Une conversation est une session d&apos;échange de 24h avec un client via l&apos;API. Si vous dépassez ce volume, un tarif transparent de 0.06€ par conversation supplémentaire s&apos;applique. La grande majorité de nos clients restent dans les volumes inclus.</p>
               </div>
             </details>
 
@@ -742,7 +742,7 @@ export default function Home() {
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Absolument pas ! Si vous savez utiliser WhatsApp, vous savez utiliser D-Solution IA. On s'occupe de toute la partie technique pour vous lors de la mise en place et nous assurons la maintenance.</p>
+                <p>Absolument pas ! Si vous savez utiliser WhatsApp, vous savez utiliser D-Solution IA. On s&apos;occupe de toute la partie technique pour vous lors de la mise en place et nous assurons la maintenance.</p>
               </div>
             </details>
 
@@ -755,7 +755,7 @@ export default function Home() {
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Après notre session de configuration d'environ 1 heure (incluse dans le setup) où nous paramétrons vos automatisations, vous êtes prêt ! Vous recevrez également une mini-formation de 15 minutes pour être autonome au quotidien.</p>
+                <p>Après notre session de configuration d&apos;environ 1 heure (incluse dans le setup) où nous paramétrons vos automatisations, vous êtes prêt ! Vous recevrez également une mini-formation de 15 minutes pour être autonome au quotidien.</p>
               </div>
             </details>
 
@@ -781,7 +781,7 @@ export default function Home() {
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Ces frais uniques couvrent bien plus que la technique ! Ils incluent : 1) L'<strong>audit de vos besoins</strong> spécifiques. 2) L'<strong>accompagnement personnalisé</strong> pour la création et la vérification de votre compte WhatsApp Business API officiel. 3) La <strong>configuration complète</strong> de vos scénarios d'automatisation et/ou de votre Chatbot IA dans nos systèmes (N8N). 4) Votre <strong>formation</strong> à l'utilisation de la solution. C'est un investissement pour une mise en route sereine et efficace.</p>
+                <p>Ces frais uniques couvrent bien plus que la technique ! Ils incluent : 1) L&#39audit de vos besoins spécifiques. 2) L&#39accompagnement personnalisé pour la création et la vérification de votre compte WhatsApp Business API officiel. 3) La configuration complète de vos scénarios d&#39automatisation et/ou de votre Chatbot IA dans nos systèmes (N8N). 4) Votre formation à l&#39utilisation de la solution. C&#39est un investissement pour une mise en route sereine et efficace.</p>
               </div>
             </details>
           </div>
@@ -808,7 +808,7 @@ export default function Home() {
             Prêt à gagner du temps et des <span className="text-primary">clients</span> ?
           </h2>
           <p className="text-subtle-text text-center max-w-2xl mx-auto mb-12">
-            Discutons de votre besoin spécifique lors d'une démo gratuite et sans engagement.
+            Discutons de votre besoin spécifique lors d&apos;une démo gratuite et sans engagement.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">

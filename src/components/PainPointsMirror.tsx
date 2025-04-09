@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react'; // Removed useEffect
 import { Check, Clock, Euro, Send, Mail } from 'lucide-react'; // Import necessary icons
 
 interface PainPoint {
@@ -61,10 +61,10 @@ const painPointsData: PainPoint[] = [
   },
   {
     id: 'coordination',
-    text: 'Coordination d\'équipe difficile',
+    text: 'Coordination d\'équipe difficile', // Reverted ' to '
     icon: '🚚', // Using truck as a placeholder for coordination/logistics
-    impact: 'Erreurs et perte d\'efficacité',
-    solution: 'Notifications et mises à jour d\'équipe centralisées',
+    impact: 'Erreurs et perte d\'efficacité', // Reverted ' to '
+    solution: 'Notifications et mises à jour d\'équipe centralisées', // Reverted ' to '
     financialImpact: 300,
     timeLoss: 1.5
   },
@@ -115,7 +115,8 @@ const PainPointsMirror: React.FC = () => {
       await fetch('/', { // Netlify handles submissions to the root path
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString(),
+        // Convert FormData entries to an array of [key, value] pairs for URLSearchParams
+        body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
       });
       setFormSubmitted(true);
       setEmailFormVisible(false); // Hide form after submission
@@ -134,7 +135,7 @@ const PainPointsMirror: React.FC = () => {
         Identifiez vos <span className="text-primary">points de friction</span>
       </h2>
       <p className="text-subtle-text text-center text-lg mb-10 max-w-2xl mx-auto">
-        Sélectionnez les tâches qui vous pèsent le plus au quotidien pour visualiser l'impact potentiel de l'automatisation.
+        Sélectionnez les tâches qui vous pèsent le plus au quotidien pour visualiser l&apos;impact potentiel de l&apos;automatisation.
       </p>
 
       {/* Grid of Pain Points */}
@@ -162,7 +163,7 @@ const PainPointsMirror: React.FC = () => {
             onClick={handleShowAnalysis}
             className="bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
           >
-            Voir l'impact potentiel
+            Voir l&apos;impact potentiel
           </button>
         </div>
       )}
@@ -236,12 +237,12 @@ const PainPointsMirror: React.FC = () => {
                   <input type="hidden" name="selected-pains" value={selectedPains.join(', ')} />
                   <p className="hidden">
                     <label>
-                      Don’t fill this out if you’re human: <input name="bot-field" />
+                      Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
                     </label>
                   </p>
 
                   <label htmlFor="email-analysis" className="block text-sm font-medium text-subtle-text mb-2">
-                    Entrez votre email pour recevoir l'analyse :
+                    Entrez votre email pour recevoir l&apos;analyse :
                   </label>
                   <div className="flex gap-2">
                     <input
