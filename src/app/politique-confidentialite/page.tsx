@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-// Removed unused Link import
 
 export const metadata: Metadata = {
   title: "Politique de Confidentialité - D-Solution IA",
@@ -16,7 +15,7 @@ export default function PolitiqueConfidentialitePage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-primary">Introduction</h2>
           <p className="text-subtle-text mb-4">
-            D-Solution IA s&#39engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre site web ou nos services.
+            D-Solution IA s&apos;engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre site web ou nos services.
           </p>
         </section>
 
@@ -28,7 +27,7 @@ export default function PolitiqueConfidentialitePage() {
           </p>
           <ul className="list-disc pl-6 mb-4 text-subtle-text space-y-1">
             <li>Informations de contact (nom, prénom, adresse e-mail, numéro de téléphone)</li>
-            <li>Informations professionnelles (nom de l&#39entreprise, secteur d&#39activité, besoins exprimés)</li>
+            <li>Informations professionnelles (nom de l&apos;entreprise, secteur d&apos;activité, besoins exprimés)</li>
             <li>Messages et demandes que vous nous envoyez</li>
           </ul>
 
@@ -48,10 +47,10 @@ export default function PolitiqueConfidentialitePage() {
           <p className="text-subtle-text mb-4">Nous utilisons vos données personnelles pour :</p>
           <ul className="list-disc pl-6 mb-4 text-subtle-text space-y-1">
             <li>Répondre à vos demandes de contact et de démonstration</li>
-            <li>Vous fournir nos services d&#39automatisation</li>
+            <li>Vous fournir nos services d&apos;automatisation</li>
             <li>Personnaliser notre offre selon vos besoins spécifiques</li>
             <li>Communiquer avec vous concernant nos services (suivi, informations)</li>
-            <li>Améliorer notre site web et nos services (analyse de l&#39utilisation)</li>
+            <li>Améliorer notre site web et nos services (analyse de l&apos;utilisation)</li>
             <li>Respecter nos obligations légales et réglementaires</li>
           </ul>
         </section>
@@ -60,7 +59,7 @@ export default function PolitiqueConfidentialitePage() {
           <h2 className="text-2xl font-semibold mb-4 text-primary">Base légale du traitement</h2>
           <p className="text-subtle-text mb-4">Nous traitons vos données personnelles sur les bases légales suivantes :</p>
           <ul className="list-disc pl-6 mb-4 text-subtle-text space-y-1">
-            <li>L&apos;exécution de mesures précontractuelles (lorsque vous demandez une démo) ou d&#39un contrat (lorsque vous devenez client)</li>
+            <li>L&apos;exécution de mesures précontractuelles (lorsque vous demandez une démo) ou d&apos;un contrat (lorsque vous devenez client)</li>
             <li>Votre consentement (par exemple, pour certains cookies non essentiels)</li>
             <li>Nos intérêts légitimes à développer notre activité, améliorer nos services et assurer la sécurité de notre site, tout en respectant vos droits</li>
             <li>Le respect de nos obligations légales</li>
@@ -104,7 +103,7 @@ export default function PolitiqueConfidentialitePage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-primary">Cookies</h2>
           <p className="text-subtle-text mb-2">
-            Notre site utilise des cookies essentiels au fonctionnement et potentiellement des cookies d&#39analyse (ex: Google Analytics) pour comprendre comment notre site est utilisé. Vous pouvez gérer vos préférences concernant les cookies non essentiels via un bandeau cookies (si mis en place) ou les paramètres de votre navigateur.
+            Notre site utilise des cookies essentiels au fonctionnement et potentiellement des cookies d&apos;analyse (ex: Google Analytics) pour comprendre comment notre site est utilisé. Vous pouvez gérer vos préférences concernant les cookies non essentiels via un bandeau cookies (si mis en place) ou les paramètres de votre navigateur.
           </p>
         </section>
 
@@ -114,20 +113,20 @@ export default function PolitiqueConfidentialitePage() {
             Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez des droits suivants sur vos données personnelles :
           </p>
           <ul className="list-disc pl-6 mb-4 text-subtle-text space-y-1">
-            <li>Droit d&#39accès</li>
+            <li>Droit d&apos;accès</li>
             <li>Droit de rectification</li>
-            <li>Droit à l&#39effacement (« droit à l&#39oubli »)</li>
+            <li>Droit à l&apos;effacement (« droit à l&apos;oubli »)</li>
             <li>Droit à la limitation du traitement</li>
             <li>Droit à la portabilité</li>
-            <li>Droit d&#39opposition (notamment au traitement à des fins de prospection)</li>
+            <li>Droit d&apos;opposition (notamment au traitement à des fins de prospection)</li>
             <li>Droit de retirer votre consentement à tout moment (sans affecter la licéité du traitement basé sur le consentement avant ce retrait)</li>
             <li>Droit de définir des directives relatives au sort de vos données après votre décès</li>
           </ul>
           <p className="text-subtle-text mb-2">
-            Pour exercer ces droits, veuillez nous contacter à l&#39adresse : 
+            Pour exercer ces droits, veuillez nous contacter à l&apos;adresse : 
             <a href="mailto:rgpd@dsolution.com" className="text-primary hover:text-secondary transition-colors ml-1">
               rgpd@dsolution.com
-            </a> ou par courrier postal à l&#39adresse indiquée dans les mentions légales.
+            </a> ou par courrier postal à l&apos;adresse indiquée dans les mentions légales.
           </p>
         </section>
 
@@ -149,7 +148,7 @@ export default function PolitiqueConfidentialitePage() {
             Adresse : [Votre adresse complète]
           </p>
           <p className="text-subtle-text mb-2">
-            Vous avez également le droit d&#39introduire une réclamation auprès de l&#39autorité de contrôle compétente, la Commission Nationale de l&#39Informatique et des Libertés (CNIL) en France.
+            Vous avez également le droit d&apos;introduire une réclamation auprès de l&apos;autorité de contrôle compétente, la Commission Nationale de l&apos;Informatique et des Libertés (CNIL) en France.
           </p>
         </section>
       </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'; // Removed useEffect
+import React, { useState } from 'react';
 import { Check, Clock, Euro, Send, Mail } from 'lucide-react'; // Import necessary icons
 
 interface PainPoint {
@@ -61,10 +61,10 @@ const painPointsData: PainPoint[] = [
   },
   {
     id: 'coordination',
-    text: 'Coordination d\'équipe difficile', // Reverted ' to '
+    text: 'Coordination d\'équipe difficile',
     icon: '🚚', // Using truck as a placeholder for coordination/logistics
-    impact: 'Erreurs et perte d\'efficacité', // Reverted ' to '
-    solution: 'Notifications et mises à jour d\'équipe centralisées', // Reverted ' to '
+    impact: 'Erreurs et perte d\'efficacité',
+    solution: 'Notifications et mises à jour d\'équipe centralisées',
     financialImpact: 300,
     timeLoss: 1.5
   },
@@ -112,11 +112,12 @@ const PainPointsMirror: React.FC = () => {
     formData.append('selected-pains', selectedPains.join(', ')); // Add selected pains
 
     try {
+      const formDataEntries = Array.from(formData.entries()) as string[][];
+
       await fetch('/', { // Netlify handles submissions to the root path
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        // Convert FormData entries to an array of [key, value] pairs for URLSearchParams
-        body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
+        body: new URLSearchParams(formDataEntries).toString(), 
       });
       setFormSubmitted(true);
       setEmailFormVisible(false); // Hide form after submission
@@ -237,7 +238,7 @@ const PainPointsMirror: React.FC = () => {
                   <input type="hidden" name="selected-pains" value={selectedPains.join(', ')} />
                   <p className="hidden">
                     <label>
-                      Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+                      Don’t fill this out if you’re human: <input name="bot-field" />
                     </label>
                   </p>
 

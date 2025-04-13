@@ -1,17 +1,13 @@
+# CONTENU CORRECT pour le fichier netlify.toml
 [build]
   command = "npm run build"
-  publish = "out"  # Changé de ".next" à "out"
+  publish = ".next" 
 
 [build.environment]
-  NODE_VERSION = "20"
-  # Supprimé NEXT_USE_NETLIFY_EDGE car nous n'utilisons plus le plugin Edge
+  NODE_VERSION = "20" 
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-
-# Configuration pour les formulaires Netlify
-[functions]
-  directory = "netlify_functions"

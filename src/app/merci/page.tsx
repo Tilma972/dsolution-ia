@@ -10,7 +10,7 @@ export default function MerciPage() {
         <p className="text-subtle-text text-xl mb-8 max-w-2xl mx-auto">
           Nous avons bien reçu votre demande et nous vous répondrons dans les plus brefs délais.
         </p>
-        <Link
+        <Link 
           href="/" 
           className="inline-block bg-primary hover:bg-secondary transition-colors text-dark-bg font-bold py-3 px-6 rounded-md"
         >

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Maximize, X, Zap } from 'lucide-react'; // Removed unused icons: Hammer, Utensils, Lightbulb, Scissors, Home, Dumbbell
+import { Maximize, X, Zap } from 'lucide-react'; // Added icons
 
 interface WhatsAppDemoProps {
   title: string;

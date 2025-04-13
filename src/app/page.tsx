@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MessageSquare, Clock, Users, CheckCircle, Check, Hammer, Utensils, Lightbulb, Scissors, Car } from 'lucide-react'; // Renamed Home icon, removed HomeIcon, Dumbbell
+import { MessageSquare, Clock, Users, CheckCircle, Check, Hammer, Utensils, Lightbulb, Scissors, Car } from 'lucide-react'; // Renamed Home icon
 import WhatsAppDemo from '@/components/WhatsAppDemo'; // Import the new component
 import PricingOption from '@/components/PricingOption';
 import TestimonialCard from '@/components/TestimonialCard';
@@ -676,7 +676,7 @@ export default function Home() {
             <TestimonialCard 
               imageSrc="/images/client-paul.jpg"
               altText="Photo de Paul M., Maçon"
-              quote="Incroyable, j'économise facile 2h par jour sur les devis et la paperasse. L'IA répond direct aux clients, c'est bluffant."
+              quote="Incroyable, j’économise facile 2h par jour sur les devis et la paperasse. L'IA répond direct aux clients, c'est bluffant."
               name="Paul M."
               title="Maçon"
             />
@@ -781,7 +781,7 @@ export default function Home() {
                 </span>
               </summary>
               <div className="mt-3 text-subtle-text">
-                <p>Ces frais uniques couvrent bien plus que la technique ! Ils incluent : 1) L&#39audit de vos besoins spécifiques. 2) L&#39accompagnement personnalisé pour la création et la vérification de votre compte WhatsApp Business API officiel. 3) La configuration complète de vos scénarios d&#39automatisation et/ou de votre Chatbot IA dans nos systèmes (N8N). 4) Votre formation à l&#39utilisation de la solution. C&#39est un investissement pour une mise en route sereine et efficace.</p>
+                <p>Ces frais uniques couvrent bien plus que la technique ! Ils incluent : 1) L&apos;<strong>audit de vos besoins</strong> spécifiques. 2) L&apos;<strong>accompagnement personnalisé</strong> pour la création et la vérification de votre compte WhatsApp Business API officiel. 3) La <strong>configuration complète</strong> de vos scénarios d&apos;automatisation et/ou de votre Chatbot IA dans nos systèmes (N8N). 4) Votre <strong>formation</strong> à l&apos;utilisation de la solution. C&apos;est un investissement pour une mise en route sereine et efficace.</p>
               </div>
             </details>
           </div>
