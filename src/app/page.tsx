@@ -834,69 +834,7 @@ export default function Home() {
             </div>
             
             {/* Colonne Droite - Formulaire */}
-            <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">Demandez votre démo</h3>
-              <form 
-                name="contact-dsolution"
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                action="/merci"
-                className="space-y-4"
-              >
-                {/* Champ caché pour Netlify */}
-                <input type="hidden" name="form-name" value="contact-dsolution" />
-                
-                {/* Champ honeypot anti-spam */}
-                <p style={{ display: 'none' }}>
-                  <label>
-                    Ne pas remplir : <input name="bot-field" />
-                  </label>
-                </p>
-                
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-subtle-text mb-1">Nom</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition" 
-                    placeholder="Votre nom complet" 
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-subtle-text mb-1">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition" 
-                    placeholder="Votre adresse email" 
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-subtle-text mb-1">Message (optionnel)</label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    rows={4} 
-                    className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition" 
-                    placeholder="Décrivez brièvement votre besoin ou posez une question..."
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-4 rounded-md transition-colors duration-300"
-                >
-                  Envoyer la demande
-                </button>
-              </form>
-            </div>
+            <ContactForm />             
           </div>
           
           {/* CTA Principal */}
