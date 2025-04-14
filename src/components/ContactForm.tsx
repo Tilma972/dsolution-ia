@@ -1,23 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 export default function ContactForm() {
   const [status, setStatus] = useState({
     submitted: false,
     submitting: false,
-    info: { error: false, msg: null }
+    info: { error: false, msg: null as string | null }
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus({ submitted: false, submitting: true, info: { error: false, msg: null } });
 
     // Pour debugging
     console.log("Form submission prevented");
     
-    const formData = new FormData(e.target);
-    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY);
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
     
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -33,7 +33,7 @@ export default function ContactForm() {
           submitting: false,
           info: { error: false, msg: "Message envoyé avec succès!" }
         });
-        e.target.reset();
+        e.currentTarget.reset();
       } else {
         setStatus({
           submitted: false,
@@ -59,7 +59,7 @@ export default function ContactForm() {
       className="space-y-4"
     >
       {/* Champ caché pour Web3Forms */}
-      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || ''} />
       
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-subtle-text mb-1">Nom</label>
