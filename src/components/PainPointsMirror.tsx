@@ -1,20 +1,21 @@
+// src/components/PainPointsMirror.tsx
 'use client';
 
-import React, { useState } from 'react';
-import { Check, Clock, Euro, Send, Mail } from 'lucide-react'; // Import necessary icons
+import React, { useState, FormEvent } from 'react'; // Ajout de FormEvent
+import { Check, Clock, Euro, Send, Mail } from 'lucide-react';
 
 interface PainPoint {
   id: string;
   text: string;
-  icon: string; // Emoji
+  icon: string;
   impact: string;
   solution: string;
-  financialImpact: number; // Euros per month
-  timeLoss: number; // Hours per week
+  financialImpact: number;
+  timeLoss: number;
 }
 
 const painPointsData: PainPoint[] = [
-  {
+    {
     id: 'devis',
     text: 'Création de devis trop lente',
     icon: '📝',
@@ -62,7 +63,7 @@ const painPointsData: PainPoint[] = [
   {
     id: 'coordination',
     text: 'Coordination d\'équipe difficile',
-    icon: '🚚', // Using truck as a placeholder for coordination/logistics
+    icon: '🚚',
     impact: 'Erreurs et perte d\'efficacité',
     solution: 'Notifications et mises à jour d\'équipe centralisées',
     financialImpact: 300,
@@ -75,16 +76,29 @@ const PainPointsMirror: React.FC = () => {
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [emailFormVisible, setEmailFormVisible] = useState(false);
   const [email, setEmail] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // États pour la soumission du formulaire d'email
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const [emailSubmissionStatus, setEmailSubmissionStatus] = useState<'idle' | 'error' | 'success'>('idle');
+  const [emailResultMessage, setEmailResultMessage] = useState('');
+
+  // Récupère la clé d'accès (la même que pour l'autre formulaire)
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+  if (!accessKey) {
+    console.error("Erreur PainPointsMirror: La variable d'environnement NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY n'est pas définie.");
+  }
 
   const togglePainPoint = (id: string) => {
     setSelectedPains((prev) =>
       prev.includes(id) ? prev.filter((painId) => painId !== id) : [...prev, id]
     );
-    // Hide analysis if selection changes
     setShowAnalysis(false);
     setEmailFormVisible(false);
-    setFormSubmitted(false);
+    // Réinitialiser l'état du formulaire email si la sélection change
+    setEmailSubmissionStatus('idle');
+    setEmailResultMessage('');
+    setIsSubmittingEmail(false);
   };
 
   const calculateImpact = () => {
@@ -103,27 +117,57 @@ const PainPointsMirror: React.FC = () => {
 
   const handleShowAnalysis = () => {
     setShowAnalysis(true);
+    // Réinitialiser l'état du formulaire email quand on affiche l'analyse
+    setEmailSubmissionStatus('idle');
+    setEmailResultMessage('');
+    setIsSubmittingEmail(false);
   };
 
-  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Mise à jour pour utiliser Web3Forms
+  const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    const formData = new FormData(e.target as HTMLFormElement);
-    formData.append('selected-pains', selectedPains.join(', ')); // Add selected pains
+    setIsSubmittingEmail(true);
+    setEmailSubmissionStatus('idle');
+    setEmailResultMessage('');
+
+    if (!accessKey) {
+        setEmailResultMessage("Erreur de configuration : clé d'accès manquante.");
+        setEmailSubmissionStatus('error');
+        setIsSubmittingEmail(false);
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email); // Récupère l'email depuis l'état
+    formData.append('selected_pains', selectedPains.join(', ')); // Les points sélectionnés
+    formData.append('access_key', accessKey);
+    formData.append('subject', `Demande Analyse Détaillée - PainPointsMirror (${window.location.hostname})`);
+    formData.append('from_name', 'Formulaire Analyse PainPointsMirror');
 
     try {
-      const formDataEntries = Array.from(formData.entries()) as string[][];
-
-      await fetch('/', { // Netlify handles submissions to the root path
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataEntries).toString(), 
+        body: formData,
       });
-      setFormSubmitted(true);
-      setEmailFormVisible(false); // Hide form after submission
+
+      const data = await response.json();
+
+      if (data.success) {
+        setEmailResultMessage('Merci ! Votre analyse détaillée vous sera envoyée sous peu.');
+        setEmailSubmissionStatus('success');
+        setEmailFormVisible(false); // Optionnel: masquer le formulaire après succès
+        setEmail(''); // Réinitialiser le champ email
+      } else {
+        console.error('Erreur Web3Forms (PainPoints):', data);
+        setEmailResultMessage(`Erreur lors de l'envoi : ${data.message || 'Veuillez réessayer.'}`);
+        setEmailSubmissionStatus('error');
+      }
     } catch (error) {
-      console.error('Form submission error:', error);
-      // Optionally: show an error message to the user
+      console.error('Erreur Fetch (PainPoints):', error);
+      setEmailResultMessage('Une erreur réseau est survenue. Veuillez vérifier votre connexion et réessayer.');
+      setEmailSubmissionStatus('error');
+    } finally {
+      setIsSubmittingEmail(false);
     }
   };
 
@@ -136,7 +180,7 @@ const PainPointsMirror: React.FC = () => {
         Identifiez vos <span className="text-primary">points de friction</span>
       </h2>
       <p className="text-subtle-text text-center text-lg mb-10 max-w-2xl mx-auto">
-        Sélectionnez les tâches qui vous pèsent le plus au quotidien pour visualiser l&apos;impact potentiel de l&apos;automatisation.
+        Sélectionnez les tâches qui vous pèsent le plus au quotidien pour visualiser l'impact potentiel de l'automatisation.
       </p>
 
       {/* Grid of Pain Points */}
@@ -164,7 +208,7 @@ const PainPointsMirror: React.FC = () => {
             onClick={handleShowAnalysis}
             className="bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-300 text-lg"
           >
-            Voir l&apos;impact potentiel
+            Voir l'impact potentiel
           </button>
         </div>
       )}
@@ -208,72 +252,71 @@ const PainPointsMirror: React.FC = () => {
             </ul>
           </div>
 
-          {/* Email Form Section */}
-          {!formSubmitted && (
-            <div className="text-center border-t border-primary/20 pt-8">
+          {/* Email Form Section - Modifié */}
+          {emailSubmissionStatus !== 'success' && ( // Ne pas afficher si succès
+             <div className="text-center border-t border-primary/20 pt-8">
               {!emailFormVisible ? (
-                <>
+                 <>
                   <p className="text-subtle-text mb-4">
                     Recevez une analyse plus détaillée et des solutions adaptées par email.
                   </p>
                   <button
                     onClick={() => setEmailFormVisible(true)}
                     className="bg-primary hover:bg-primary/80 text-dark-bg font-semibold py-2 px-6 rounded-md transition-colors duration-300 inline-flex items-center"
+                    disabled={isSubmittingEmail} // Désactiver si en cours d'envoi
                   >
                     <Mail className="mr-2" size={18} />
                     Recevoir mon analyse détaillée
                   </button>
-                </>
-              ) : (
-                <form
-                  name="analyse-detaillee"
-                  method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
-                  onSubmit={handleEmailSubmit}
-                  className="max-w-md mx-auto"
-                >
-                  {/* Hidden fields for Netlify */}
-                  <input type="hidden" name="form-name" value="analyse-detaillee" />
-                  <input type="hidden" name="selected-pains" value={selectedPains.join(', ')} />
-                  <p className="hidden">
-                    <label>
-                      Don’t fill this out if you’re human: <input name="bot-field" />
-                    </label>
-                  </p>
+                 </>
+               ) : (
+                 <form
+                   onSubmit={handleEmailSubmit} // Utilise notre fonction
+                   className="max-w-md mx-auto space-y-3" // Ajout space-y
+                 >
+                  {/* Pas besoin de champs cachés Netlify ici */}
+                   <label htmlFor="email-analysis" className="block text-sm font-medium text-subtle-text">
+                     Entrez votre email pour recevoir l'analyse :
+                   </label>
+                   <div className="flex gap-2">
+                     <input
+                       type="email"
+                       id="email-analysis"
+                       name="email" // Garder name pour accessibilité et sémantique, mais on utilise l'état 'email'
+                       value={email}
+                       onChange={(e) => setEmail(e.target.value)}
+                       className="flex-grow bg-dark-bg border border-primary/30 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition"
+                       placeholder="Votre adresse email"
+                       required
+                       disabled={isSubmittingEmail} // Désactiver pendant l'envoi
+                     />
+                     <button
+                       type="submit"
+                       className={`bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-4 rounded-md transition-colors duration-300 inline-flex items-center ${isSubmittingEmail ? 'opacity-50 cursor-not-allowed' : ''}`}
+                       disabled={isSubmittingEmail} // Désactiver pendant l'envoi
+                     >
+                       {isSubmittingEmail ? <Clock size={18} className="animate-spin" /> : <Send size={18} />}
+                     </button>
+                   </div>
+                    {/* Affichage des messages d'erreur/succès */}
+                    {(emailSubmissionStatus === 'idle' || emailSubmissionStatus === 'error') && (
+                      <div className="text-center border-t border-primary/20 pt-8">
+                        <p className={`text-sm ${emailSubmissionStatus === 'error' ? 'text-red-400' : 'text-gray-400'}`}>
+                          {emailResultMessage}
+                        </p>
+                      </div>
+                    )}
+                 </form>
+               )}
+             </div>
+           )}
 
-                  <label htmlFor="email-analysis" className="block text-sm font-medium text-subtle-text mb-2">
-                    Entrez votre email pour recevoir l&apos;analyse :
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="email"
-                      id="email-analysis"
-                      name="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="flex-grow bg-dark-bg border border-primary/30 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition"
-                      placeholder="Votre adresse email"
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-4 rounded-md transition-colors duration-300 inline-flex items-center"
-                    >
-                      <Send size={18} />
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          )}
-
-          {/* Confirmation Message */}
-          {formSubmitted && (
+          {/* Confirmation Message (Succès) */}
+          {emailSubmissionStatus === 'success' && (
             <div className="text-center border-t border-primary/20 pt-8">
-              <div className="bg-green-500/20 text-green-300 border border-green-500/30 p-4 rounded-md max-w-md mx-auto">
+              <div className="bg-green-500/20 text-green-300 border border-green-500/30 p-4 rounded-md max-w-md mx-auto inline-flex items-center">
                 <Check className="inline mr-2" />
-                Merci ! Votre analyse détaillée vous sera envoyée sous peu.
+                {emailResultMessage || "Merci ! Votre demande a été envoyée."} {/* Affiche le message de succès */}
               </div>
             </div>
           )}

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ContactForm from '@/components/ContactForm'; 
 import Link from 'next/link';
 import { MessageSquare, Clock, Users, CheckCircle, Check, Hammer, Utensils, Lightbulb, Scissors, Car } from 'lucide-react'; // Renamed Home icon
 import WhatsAppDemo from '@/components/WhatsAppDemo'; // Import the new component
