@@ -1,4 +1,3 @@
-# CONTENU CORRECT pour le fichier netlify.toml
 [build]
   command = "npm run build"
   publish = ".next" 
