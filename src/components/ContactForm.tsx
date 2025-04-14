@@ -1,25 +1,26 @@
 // src/components/ContactForm.tsx
-"use client"; // Indique que c'est un composant client
+"use client";
 
 import React, { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation'; // Importez le router Next.js
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [resultMessage, setResultMessage] = useState('');
+  const router = useRouter(); // Initialisez le router
 
   // Récupère la clé d'accès depuis les variables d'environnement
   const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
   if (!accessKey) {
     console.error("Erreur: La variable d'environnement NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY n'est pas définie.");
-    // Vous pourriez afficher un message d'erreur à l'utilisateur ici si nécessaire
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Empêche le rechargement de la page
     setIsSubmitting(true);
-    setSubmissionStatus('idle'); // Reset status on new submit
+    setSubmissionStatus('idle');
     setResultMessage('');
 
     if (!accessKey) {
@@ -48,44 +49,42 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (data.success) {
-        setResultMessage('Votre demande a bien été envoyée ! Nous reviendrons vers vous rapidement.');
-        setSubmissionStatus('success');
-        // Optionnel: Réinitialiser le formulaire après succès
-        (event.target as HTMLFormElement).reset();
-        // Si vous n'avez PAS configuré la redirection dans Web3Forms, vous pouvez rediriger ici :
-        // window.location.href = '/merci';
+        // Au lieu d'afficher un message, rediriger vers la page de remerciement
+        router.push('/merci');
       } else {
         console.error('Erreur Web3Forms:', data);
         setResultMessage(`Erreur lors de l'envoi : ${data.message || 'Veuillez réessayer.'}`);
         setSubmissionStatus('error');
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.error('Erreur Fetch:', error);
       setResultMessage('Une erreur réseau est survenue. Veuillez vérifier votre connexion et réessayer.');
       setSubmissionStatus('error');
-    } finally {
       setIsSubmitting(false);
     }
+    // Nous ne mettons pas setIsSubmitting(false) en cas de succès
+    // car la page va être redirigée
   };
 
   return (
     <div>
       <h3 className="text-2xl font-semibold text-white mb-6">Demandez votre démo</h3>
       <form
-        onSubmit={handleSubmit} // Utilise notre fonction handleSubmit
+        onSubmit={handleSubmit}
         className="space-y-4"
       >
-        {/* Les champs restent les mêmes, mais sans les attributs Netlify */}
+        {/* Les champs restent les mêmes */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-subtle-text mb-1">Nom</label>
           <input
             type="text"
             id="name"
-            name="name" // 'name' est important pour FormData
+            name="name"
             className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition"
             placeholder="Votre nom complet"
             required
-            disabled={isSubmitting} // Désactive pendant l'envoi
+            disabled={isSubmitting}
           />
         </div>
 
@@ -94,11 +93,11 @@ export default function ContactForm() {
           <input
             type="email"
             id="email"
-            name="email" // 'name' est important pour FormData
+            name="email"
             className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition"
             placeholder="Votre adresse email"
             required
-            disabled={isSubmitting} // Désactive pendant l'envoi
+            disabled={isSubmitting}
           />
         </div>
 
@@ -106,24 +105,24 @@ export default function ContactForm() {
           <label htmlFor="message" className="block text-sm font-medium text-subtle-text mb-1">Message (optionnel)</label>
           <textarea
             id="message"
-            name="message" // 'name' est important pour FormData
+            name="message"
             rows={4}
             className="w-full bg-card-bg border border-primary/20 rounded-md p-3 text-white focus:border-primary focus:ring-primary transition"
             placeholder="Décrivez brièvement votre besoin ou posez une question..."
-            disabled={isSubmitting} // Désactive pendant l'envoi
+            disabled={isSubmitting}
           ></textarea>
         </div>
 
-        {/* Affichage conditionnel des messages de résultat */}
-        {resultMessage && (
-          <p className={`text-sm ${submissionStatus === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+        {/* Affichage conditionnel des messages d'erreur uniquement */}
+        {submissionStatus === 'error' && resultMessage && (
+          <p className="text-sm text-red-400">
             {resultMessage}
           </p>
         )}
 
         <button
           type="submit"
-          disabled={isSubmitting} // Désactive le bouton pendant l'envoi
+          disabled={isSubmitting}
           className={`w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-4 rounded-md transition-colors duration-300 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isSubmitting ? 'Envoi en cours...' : 'Envoyer la demande'}
